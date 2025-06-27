@@ -1,9 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// code sourced from https://github.com/MinaPecheux/UnityTutorials-BehaviourTrees/tree/master/Assets/Scripts/BehaviorTree
+// for the basic BT implementation
+
 namespace BehaviourTree
 {
-    public enum NodeState { Success, Failure, Running }
+    public enum NodeState { SUCCESS, FAILURE, RUNNING }
 
 
     public class Node
@@ -32,13 +35,14 @@ namespace BehaviourTree
             children.Add(node);
         }
 
-        public virtual NodeState Evaluate() => NodeState.Failure;
+        public virtual NodeState Evaluate() => NodeState.FAILURE;
 
         public void SetData(string key, object value)
         {
             dataContext[key] = value;
         }
 
+        // Recursive to allow to fetch data from parent nodes
         public object GetData(string key)
         {
             object value = null;
@@ -56,6 +60,7 @@ namespace BehaviourTree
             return null;
         }
 
+        // Recursive to allow to delete data from parent nodes
         public bool ClearData(string key)
         {
             if (dataContext.ContainsKey(key))

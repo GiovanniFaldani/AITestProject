@@ -8,16 +8,16 @@ public class Character : MonoBehaviour
     [SerializeField] protected int maxHp;
     [SerializeField] protected float speed;
     [SerializeField] protected float maxSpeed;
-    [SerializeField] protected float turnSpeed;
-    [SerializeField] protected Vector3 lookDirection;
+    [SerializeField] protected int damage;
     [SerializeField] protected float shotCooldown;
     [SerializeField] protected float respawnCooldown;
-    [SerializeField] protected int damage;
     [SerializeField] protected GameObject shotPrefab;
+    [SerializeField] protected Transform shotSocket;
     [SerializeField] protected Vector3 spawnPoint;
 
     // input variables
     protected float x, z, fire;
+    [SerializeField] protected Vector3 lookDirection;
 
     // timers
     protected float shotTimer = 0.0f;
@@ -59,7 +59,7 @@ public class Character : MonoBehaviour
 
     protected void TurnTowardsLookDirection()
     {
-
+        transform.rotation = Quaternion.LookRotation(lookDirection);
     }
 
     public void ApplyMovement()
@@ -84,6 +84,8 @@ public class Character : MonoBehaviour
 
     public void Shoot()
     {
-
+        Projectile projectile = Instantiate(shotPrefab, shotSocket).GetComponent<Projectile>();
+        projectile.transform.parent = null;
+        projectile.SetDamage(damage);
     }
 }

@@ -2039,7 +2039,7 @@ MonoBehaviour:
 
     - WASD/Arrow keys: move
 
-    - Space/Left Click: bomb
+    - Left Click: shoot
 
     -
     Esc: pause'

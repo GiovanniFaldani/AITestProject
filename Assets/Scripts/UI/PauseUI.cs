@@ -5,6 +5,10 @@ using UnityEngine.SceneManagement;
 
 public class PauseUI : BaseUI
 {
+    private void OnEnable()
+    {
+        Time.timeScale = 0.0f;
+    }
 
     public void GoToMainMenu()
     {
@@ -13,7 +17,7 @@ public class PauseUI : BaseUI
 
     public void GoToHud()
     {
-        Time.timeScale = 1;
-        UIManager.Instance.ShowUI(UIManager.GameUI.HUD);
+        Time.timeScale = 1.0f;
+        UIManager.Instance.ShowUI(GameUI.HUD);
     }
 }

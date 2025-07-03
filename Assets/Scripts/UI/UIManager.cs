@@ -7,17 +7,6 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    public enum GameUI
-    {
-        NONE,
-        MainMenu,
-        HUD,
-        Pause,
-        Win,
-        Lose,
-        Option,
-    }
-
     private Dictionary<GameUI, IGameUI> registeredUIs = new Dictionary<GameUI, IGameUI>();
     public Transform UIContainer;
     private GameUI currentActiveUI = GameUI.NONE;

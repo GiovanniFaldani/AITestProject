@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BaseUI : MonoBehaviour, IGameUI
 {
-    [SerializeField] private UIManager.GameUI gameUI;
+    [SerializeField] private GameUI gameUI;
 
-    public UIManager.GameUI GetUIType()
+    public GameUI GetUIType()
     {
         return gameUI;
     }

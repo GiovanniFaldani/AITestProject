@@ -7,23 +7,17 @@ public class MainMenuUI : BaseUI
 {
     private void Awake()
     {
-        Time.timeScale = 0f;
-    }
-
-    private void Start()
-    {
-        
+        Time.timeScale = 0.0f;
     }
 
     public void GoToHud()
     {
-        Time.timeScale = 1f;
-        UIManager.Instance.ShowUI(UIManager.GameUI.HUD);
+        UIManager.Instance.ShowUI(GameUI.HUD);
     }
 
     public void GoToOptions()
     {
-        UIManager.Instance.ShowUI(UIManager.GameUI.Option);
+        UIManager.Instance.ShowUI(GameUI.Option);
     }
 
     public void ExitGame()

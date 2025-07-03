@@ -7,12 +7,16 @@ public class Player : Character
         spawnPoint = transform.position;
     }
 
-    private void Update()
+    protected override void Update()
     {
-        GetInputs();
-        TurnTowardsLookDirection();
-        ApplyMovement();
-        CheckForShot();
+        base.Update();
+        if (Time.timeScale != 0.0f && isActive)
+        {
+            GetInputs();
+            TurnTowardsLookDirection();
+            ApplyMovement();
+            CheckForShot();
+        }
     }
 
     private void GetInputs()

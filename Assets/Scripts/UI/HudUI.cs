@@ -5,11 +5,16 @@ using UnityEngine.UI;
 
 public class HudUI : BaseUI
 {
+    private void OnEnable()
+    {
+        Time.timeScale = 1.0f;
+    }
+
     private void Update()
     {
         if (Input.GetKeyUp(KeyCode.Escape))
         {
-            UIManager.Instance.ShowUI(UIManager.GameUI.Pause);
+            UIManager.Instance.ShowUI(GameUI.Pause);
             Time.timeScale = 0;
         }
     }

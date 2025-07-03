@@ -8,15 +8,19 @@ public class Character : MonoBehaviour
     [SerializeField] protected int maxHp;
     [SerializeField] protected float speed;
     [SerializeField] protected float maxSpeed;
+    [SerializeField] protected float captureSpeed;
     [SerializeField] protected int damage;
     [SerializeField] protected float shotCooldown;
     [SerializeField] protected float respawnCooldown;
     [SerializeField] protected GameObject shotPrefab;
+    [SerializeField] protected GameObject meshNode;
     [SerializeField] protected Transform shotSocket;
     [SerializeField] protected Vector3 spawnPoint;
+    [SerializeField] protected bool isActive = true;
 
     // input variables
     protected float x, z, fire;
+    private int baseHp;
     [SerializeField] protected Vector3 lookDirection;
 
     // timers
@@ -24,11 +28,19 @@ public class Character : MonoBehaviour
 
     // components
     protected Rigidbody rb;
+    private Collider col;
 
 
     protected void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        col = GetComponent<Collider>();
+        baseHp = hp;
+    }
+
+    protected virtual void Update()
+    {
+        if (!isActive) return;
     }
 
     public void TakeDamage(int damage)
@@ -46,15 +58,16 @@ public class Character : MonoBehaviour
 
     protected void Respawn()
     {
-       StartCoroutine(WaitForRespawn());
+        hp = baseHp;
+        StartCoroutine(WaitForRespawn());
     }
 
     protected IEnumerator WaitForRespawn()
     {
         transform.position = spawnPoint;
-        gameObject.SetActive(false);
-        yield return new WaitForSecondsRealtime(respawnCooldown);
-        gameObject.SetActive(true);
+        DeactivateCharacter();
+        yield return new WaitForSeconds(respawnCooldown);
+        ActivateCharacter();
     }
 
     protected void TurnTowardsLookDirection()
@@ -87,5 +100,25 @@ public class Character : MonoBehaviour
         Projectile projectile = Instantiate(shotPrefab, shotSocket).GetComponent<Projectile>();
         projectile.transform.parent = null;
         projectile.SetDamage(damage);
+    }
+
+    public float GetCaptureSpeed()
+    {
+        return captureSpeed;
+    }
+
+    protected void DeactivateCharacter()
+    {
+        rb.linearVelocity = Vector3.zero;
+        isActive = false;
+        col.enabled = false;
+        meshNode.SetActive(false);
+    }
+
+    protected void ActivateCharacter()
+    {
+        isActive = true;
+        col.enabled = true;
+        meshNode.SetActive(true);
     }
 }

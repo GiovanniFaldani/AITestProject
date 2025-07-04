@@ -19,10 +19,13 @@ namespace BehaviourTree
         // Questo sarà la blackboard del BT
         private Dictionary<string, object> dataContext = new Dictionary<string, object>();
 
+        // Costruttore vuoto
         public Node()
         {
             parent = null;
         }
+
+        // COstruttore che lega ai figli
         public Node(List<Node> children)
         {
             foreach (Node child in children)

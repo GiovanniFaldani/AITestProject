@@ -31,7 +31,7 @@ public class Character : MonoBehaviour
     private Collider col;
 
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();

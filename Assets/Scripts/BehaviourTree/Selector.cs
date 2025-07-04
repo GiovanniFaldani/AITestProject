@@ -1,7 +1,7 @@
 using BehaviourTree;
 using System.Collections.Generic;
 
-namespace BehaviorTree
+namespace BehaviourTree
 {
     public class Selector : Node
     {

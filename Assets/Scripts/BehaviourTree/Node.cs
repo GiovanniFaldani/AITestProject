@@ -15,6 +15,7 @@ namespace BehaviourTree
 
         public Node parent;
         public List<Node> children = new List<Node>();
+        public int currentChild = 0;
 
         // Questo sarà la blackboard del BT
         private Dictionary<string, object> dataContext = new Dictionary<string, object>();

@@ -1,8 +1,8 @@
+using BehaviourTree;
 using UnityEngine;
 using UnityEngine.AI;
-using BehaviourTree;
 
-public class GoToPointBehavior : Node
+public class StayOnPointBehavior : Node
 {
     private NavMeshAgent agent;
     private Transform[] destinations;
@@ -14,7 +14,7 @@ public class GoToPointBehavior : Node
     private Transform destination;
 
 
-    public GoToPointBehavior(NavMeshAgent _agent, Transform[] _destinations, float _margin)
+    public StayOnPointBehavior(NavMeshAgent _agent, Transform[] _destinations, float _margin)
     {
         agent = _agent;
         destinations = _destinations;
@@ -26,7 +26,7 @@ public class GoToPointBehavior : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("GoToPointBehavior");
+        Debug.Log("StayOnPointBehavior");
         agent.isStopped = false;
 
         // Initialization, only happens on the first frame
@@ -38,7 +38,7 @@ public class GoToPointBehavior : Node
             waitTimer = waitTime;
             init = false;
         }
-        if(waitTimer > 0)
+        if (waitTimer > 0)
         {
             waitTimer -= Time.deltaTime;
         }
@@ -47,10 +47,17 @@ public class GoToPointBehavior : Node
             agent.SetDestination(destination.position);
             agent.transform.parent = destination;
         }
-        else
+        else if (AIManager.Instance.point.capturePercentRange <= -100.0f) // capture point is under control
         {
             agent.transform.parent = null;
             return NodeState.SUCCESS;
+        }
+        else
+        {
+            Debug.Log("Moving around point");
+            destination = AIManager.Instance.ChooseFreeDestination(destinations);
+            agent.transform.parent = null;
+            agent.SetDestination(destination.position);
         }
 
         return NodeState.RUNNING;

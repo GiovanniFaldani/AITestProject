@@ -8,14 +8,17 @@ public class AIController : Character
     [SerializeField] public float destinationMargin = 0.1f;
 
     public NavMeshAgent agent;
-    private EnemyBT enemyBT;
 
     protected override void Awake()
     {
         base.Awake();
         agent = GetComponent<NavMeshAgent>();
-        enemyBT = GetComponent<EnemyBT>();
         agent.speed = this.speed;
+    }
+
+    protected override void Update()
+    {
+        base.Update();
     }
 
 }

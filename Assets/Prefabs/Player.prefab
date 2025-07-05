@@ -309,7 +309,7 @@ MonoBehaviour:
   maxSpeed: 1
   captureSpeed: 0.1
   damage: 1
-  shotCooldown: 0.5
+  shotCooldown: 0.25
   respawnCooldown: 5
   shotPrefab: {fileID: 4716816593288495692, guid: e308fd2e3c41ccc488ed9150907df309, type: 3}
   meshNode: {fileID: 5175560803453417455}

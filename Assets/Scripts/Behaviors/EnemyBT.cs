@@ -9,11 +9,25 @@ public class EnemyBT : BehaviourTree.Tree
     protected override Node SetupTree()
     {
         controller = GetComponent<AIController>();
+
+        // Behavior definitions
         Node goToPoint = new GoToPointBehavior(controller.agent, AIManager.Instance.pointHomes, controller.destinationMargin);
+        Node stayOnPoint = new StayOnPointBehavior(controller.agent, AIManager.Instance.pointHomes, controller.destinationMargin);
+
+
         Node root = new Selector(new List<Node>
         {
-            goToPoint
+            // Add higher priority behaviours
+
+            new Sequence(new List<Node>
+            {
+                goToPoint,
+                stayOnPoint,
+            })
         });
+
+        // c'è bisogno di: sequencer che fa GoToPoint, poi StayOnPoint finché non arriva in vantaggio l'AI, e poi TakeCover
+        // A priorità maggiore (più in basso a sx del BT), ci saranno Fight/ShootPlayerInRange e FindHealthPack con nodi selector
 
         return root;
     }

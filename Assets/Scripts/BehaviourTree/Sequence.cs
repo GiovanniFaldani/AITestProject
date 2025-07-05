@@ -10,28 +10,20 @@ namespace BehaviourTree
 
         public override NodeState Evaluate()
         {
-            bool anyChildIsRunning = false;
+            NodeState childStatus = children[currentChild].Evaluate();
 
-            foreach (Node node in children)
+            if (childStatus == NodeState.RUNNING || childStatus == NodeState.FAILURE)
+                return childStatus;
+
+            currentChild++;
+
+            if (currentChild >= children.Count)
             {
-                switch (node.Evaluate())
-                {
-                    case NodeState.FAILURE:
-                        state = NodeState.FAILURE;
-                        return state;
-                    case NodeState.SUCCESS:
-                        continue;
-                    case NodeState.RUNNING:
-                        anyChildIsRunning = true;
-                        continue;
-                    default:
-                        state = NodeState.SUCCESS;
-                        return state;
-                }
+                currentChild = 0;
+                return NodeState.SUCCESS;
             }
 
-            state = anyChildIsRunning ? NodeState.RUNNING : NodeState.SUCCESS;
-            return state;
+            return NodeState.RUNNING;
         }
 
     }

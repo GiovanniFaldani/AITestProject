@@ -2,7 +2,7 @@ using BehaviourTree;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class StayOnPointBehavior : Node
+public class SeekCoverBehavior : Node
 {
     private NavMeshAgent agent;
     private Transform[] destinations;
@@ -14,7 +14,7 @@ public class StayOnPointBehavior : Node
     private Transform destination;
 
 
-    public StayOnPointBehavior(NavMeshAgent _agent, Transform[] _destinations, float _margin)
+    public SeekCoverBehavior(NavMeshAgent _agent, Transform[] _destinations, float _margin)
     {
         agent = _agent;
         destinations = _destinations;
@@ -26,7 +26,7 @@ public class StayOnPointBehavior : Node
 
     public override NodeState Evaluate()
     {
-        Debug.Log("StayOnPointBehavior");
+        Debug.Log("SeekCoverBehavior");
 
         // Initialization, only happens on the first frame
         if (init)
@@ -46,15 +46,18 @@ public class StayOnPointBehavior : Node
             agent.SetDestination(destination.position);
             agent.transform.parent = destination;
         }
-        else if (AIManager.Instance.point.capturePercentRange <= -100.0f) // capture point is under control
+        else if (AIManager.Instance.point.capturePercentRange >= 0.0f) // capture point is not under control
         {
+            // Only exit the behavior if player gains an advantage
             agent.transform.parent = null;
             return NodeState.SUCCESS;
         }
         else
         {
-            Debug.Log("Moving around point");
+            Debug.Log("Moving around cover");
             destination = AIManager.Instance.ChooseFreeDestination(destinations);
+            waitTime = Random.Range(1f, 5f); // Stay in cover for 1 to 5 seconds
+            waitTimer = waitTime;
             agent.transform.parent = null;
             agent.SetDestination(destination.position);
         }

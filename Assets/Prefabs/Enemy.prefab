@@ -157,9 +157,12 @@ MonoBehaviour:
   spawnPoint: {x: -45, y: 0, z: 45}
   isActive: 1
   lookDirection: {x: 0, y: 0, z: 0}
-  activationRange: 0
+  activationRange: 15
+  attackRange: 10
   destinationMargin: 0.1
   agent: {fileID: 0}
+  enemyBT: {fileID: 0}
+  player: {fileID: 0}
 --- !u!114 &4016589670746154305
 MonoBehaviour:
   m_ObjectHideFlags: 0

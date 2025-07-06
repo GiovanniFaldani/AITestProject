@@ -6,7 +6,7 @@ public class AIManager : MonoBehaviour
     [SerializeField] public Transform[] coverHomes;
     [SerializeField] public Transform[] healthPacks;
 
-    public CapturePoint point;
+    [HideInInspector] public CapturePoint point;
 
     public static AIManager Instance { get; private set; }
 

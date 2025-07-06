@@ -43,6 +43,11 @@ public class Character : MonoBehaviour
         if (!isActive) return;
     }
 
+    public int GetCurrentHp()
+    {
+        return hp;
+    }
+
     public void TakeDamage(int damage)
     {
         hp -= damage;

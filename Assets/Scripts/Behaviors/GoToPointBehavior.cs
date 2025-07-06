@@ -27,7 +27,6 @@ public class GoToPointBehavior : Node
     public override NodeState Evaluate()
     {
         Debug.Log("GoToPointBehavior");
-        agent.isStopped = false;
 
         // Initialization, only happens on the first frame
         if (init)

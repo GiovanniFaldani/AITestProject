@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public float GetTimer()
+    {
+        return gameTimer;
+    }
+
     private void EndGame()
     {
         if (capturePoint.capturePercentRange > 0) Victory();

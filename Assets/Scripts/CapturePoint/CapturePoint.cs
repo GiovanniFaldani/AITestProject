@@ -24,7 +24,7 @@ public class CapturePoint : MonoBehaviour
         {
             capturePercentRange += other.GetComponent<Player>().GetCaptureSpeed();
         }
-        else if (other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
             capturePercentRange -= other.GetComponent<AIController>().GetCaptureSpeed();
         }

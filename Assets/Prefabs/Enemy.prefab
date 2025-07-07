@@ -145,9 +145,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 3
   maxHp: 5
-  speed: 10
+  speed: 8
   maxSpeed: 1
-  captureSpeed: 0.01
+  captureSpeed: 0.05
   damage: 1
   shotCooldown: 1
   respawnCooldown: 10

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem.XR;
 
 [RequireComponent (typeof(NavMeshAgent))]
 public class AIController : Character

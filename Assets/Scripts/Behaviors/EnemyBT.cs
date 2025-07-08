@@ -23,19 +23,18 @@ public class EnemyBT : BehaviourTree.Tree
         // A priorità maggiore (più in basso a sx del BT), ci saranno Fight/ShootPlayerInRange e FindHealthPack con nodi selector
         Node root = new Selector(new List<Node>
         {
-            // Add GetInRange and Attack behavior here as a sequence that can fail
+            seekHealthPack,
             new Sequence(  new List<Node>
             {
-               getInRange,
-               attack
+                getInRange,
+                attack
             }),
             new Sequence( new List<Node>
             {
-                seekHealthPack,
                 goToPoint,
                 stayOnPoint,
                 seekCover
-            })
+            }),
         });
 
 

@@ -28,7 +28,7 @@ public class SeekHealthPackBehavior : Node
 
     public override NodeState Evaluate()
     {
-        if (aiController.GetCurrentHp() > 1) return NodeState.SUCCESS; // exit behaviour if health is high enough
+        if (aiController.GetCurrentHp() > 1) return NodeState.FAILURE; // exit behaviour if health is high enough
 
         Debug.Log("SeekHealthPackBehavior");
 
@@ -47,6 +47,7 @@ public class SeekHealthPackBehavior : Node
         }
         else if (Vector3.Distance(agent.transform.position, destination.position) > margin)
         {
+            agent.ResetPath();
             agent.SetDestination(destination.position);
             agent.transform.parent = destination;
         }
@@ -55,6 +56,7 @@ public class SeekHealthPackBehavior : Node
             Debug.Log("Moving to health pack");
             destination = AIManager.Instance.ChooseFreeDestination(destinations);
             agent.transform.parent = null;
+            agent.ResetPath();
             agent.SetDestination(destination.position);
         }
 

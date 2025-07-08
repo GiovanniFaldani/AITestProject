@@ -43,6 +43,7 @@ public class StayOnPointBehavior : Node
         }
         else if (Vector3.Distance(agent.transform.position, destination.position) > margin)
         {
+            agent.ResetPath();
             agent.SetDestination(destination.position);
             agent.transform.parent = destination;
         }
@@ -56,6 +57,7 @@ public class StayOnPointBehavior : Node
             Debug.Log("Moving around point");
             destination = AIManager.Instance.ChooseFreeDestination(destinations);
             agent.transform.parent = null;
+            agent.ResetPath();
             agent.SetDestination(destination.position);
         }
 

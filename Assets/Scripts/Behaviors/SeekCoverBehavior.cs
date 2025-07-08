@@ -43,8 +43,8 @@ public class SeekCoverBehavior : Node
         }
         else if (Vector3.Distance(agent.transform.position, destination.position) > margin)
         {
+            agent.ResetPath();
             agent.SetDestination(destination.position);
-            agent.transform.parent = destination;
         }
         else if (AIManager.Instance.point.capturePercentRange >= 0.0f) // capture point is not under control
         {
@@ -59,6 +59,7 @@ public class SeekCoverBehavior : Node
             waitTime = Random.Range(1f, 5f); // Stay in cover for 1 to 5 seconds
             waitTimer = waitTime;
             agent.transform.parent = null;
+            agent.ResetPath();
             agent.SetDestination(destination.position);
         }
 

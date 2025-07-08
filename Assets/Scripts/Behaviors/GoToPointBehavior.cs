@@ -43,6 +43,7 @@ public class GoToPointBehavior : Node
         }
         else if (Vector3.Distance(agent.transform.position, destination.position) > margin)
         {
+            agent.ResetPath();
             agent.SetDestination(destination.position);
             agent.transform.parent = destination;
         }

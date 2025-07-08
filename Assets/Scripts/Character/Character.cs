@@ -36,6 +36,7 @@ public class Character : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         col = GetComponent<Collider>();
         baseHp = hp;
+        spawnPoint = transform.position;
     }
 
     protected virtual void Update()
@@ -112,7 +113,7 @@ public class Character : MonoBehaviour
         return captureSpeed;
     }
 
-    protected void DeactivateCharacter()
+    protected virtual void DeactivateCharacter()
     {
         rb.linearVelocity = Vector3.zero;
         isActive = false;
@@ -120,7 +121,7 @@ public class Character : MonoBehaviour
         meshNode.SetActive(false);
     }
 
-    protected void ActivateCharacter()
+    protected virtual void ActivateCharacter()
     {
         isActive = true;
         col.enabled = true;
